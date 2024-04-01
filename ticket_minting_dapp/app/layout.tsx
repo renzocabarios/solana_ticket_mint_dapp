@@ -7,12 +7,11 @@ import {
   WalletProvider,
 } from "@solana/wallet-adapter-react";
 
-import {
-  WalletModalProvider,
-  WalletDisconnectButton,
-  WalletMultiButton,
-} from "@solana/wallet-adapter-react-ui";
+import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { BLOCKCHAIN_CONFIG } from "@/lib/blockhain.config";
+
+require("@solana/wallet-adapter-react-ui/styles.css");
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -31,11 +30,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ConnectionProvider endpoint={BLOCKCHAIN_CONFIG.rpc}>
           <WalletProvider wallets={[]} autoConnect>
-            <WalletModalProvider>
-              <WalletMultiButton />
-              <WalletDisconnectButton />
-              {mounted && children}
-            </WalletModalProvider>
+            <WalletModalProvider>{mounted && children}</WalletModalProvider>
           </WalletProvider>
         </ConnectionProvider>
       </body>
